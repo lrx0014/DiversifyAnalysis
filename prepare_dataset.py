@@ -1,5 +1,6 @@
 import argparse
 import os
+import tarfile
 import zipfile
 
 import requests
@@ -36,8 +37,15 @@ def extract_dataset(dataset_path, data_dir):
     Extract the downloaded dataset.
     """
     print(f"Extracting {dataset_path}...")
-    with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
-        zip_ref.extractall(data_dir)
+    if dataset_path.endswith(".zip"):
+        with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
+            zip_ref.extractall(data_dir)
+    elif dataset_path.endswith((".tar", ".tar.gz", ".tar.bz2")):
+        with tarfile.open(dataset_path, 'r:*') as tar_ref:
+            tar_ref.extractall(data_dir)
+    else:
+        raise ValueError("Unsupported file format. Please provide a zip, tar, tar.gz, or tar.bz2 file.")
+
     print(f"Extracted to {data_dir}")
 
     # Clean up the zip file
