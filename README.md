@@ -1,0 +1,2 @@
+# DiversifyAnalysis
+Reproduce the experiments from paper "OUT-OF-DISTRIBUTION REPRESENTATION LEARNING FOR TIME SERIES CLASSIFICATION"
