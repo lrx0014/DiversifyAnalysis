@@ -4,6 +4,8 @@ idna==3.10
 requests==2.32.3
 urllib3==1.26.7
 torch>=1.13.1
-torchvision
-scipy
+torchvision~=0.20.1
+scipy~=1.13.1
 numpy==1.23.5
+
+pillow~=11.0.0

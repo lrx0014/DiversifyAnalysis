@@ -5,10 +5,10 @@
 import numpy as np
 from torch.utils.data import DataLoader
 
-import datautil.actdata.util as actutil
-from datautil.util import combindataset, subdataset
+import diversify.datautil.actdata.util as actutil
+from diversify.datautil.util import combindataset, subdataset
 
-import datautil.actdata.cross_people as cross_people
+import diversify.datautil.actdata.cross_people as cross_people
 
 task_act = {'cross_people': cross_people}
 

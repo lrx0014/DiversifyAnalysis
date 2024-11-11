@@ -8,10 +8,10 @@ import torch.nn.functional as F
 import numpy as np
 from scipy.spatial.distance import cdist
 
-from alg.modelopera import get_fea
-from network import Adver_network, common_network
-from alg.algs.base import Algorithm
-from loss.common_loss import Entropylogits
+from diversify.alg.modelopera import get_fea
+from diversify.network import Adver_network, common_network
+from diversify.alg.algs.base import Algorithm
+from diversify.loss.common_loss import Entropylogits
 
 
 class Diversify(Algorithm):

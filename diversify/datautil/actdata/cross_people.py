@@ -1,8 +1,8 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
-from datautil.actdata.util import *
-from datautil.util import mydataset, Nmax
+from diversify.datautil.actdata.util import *
+from diversify.datautil.util import mydataset, Nmax
 import numpy as np
 import torch
 

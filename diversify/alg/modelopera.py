@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 
 import torch
-from network import act_network
+from diversify.network import act_network
 
 
 def get_fea(args):
