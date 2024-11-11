@@ -88,6 +88,7 @@ def main(args):
             # Save the model for each round
             output_model_path = os.path.join(args.output_model, f'model_round_{round}.pth')
             torch.save(algorithm.state_dict(), output_model_path)
+            os.makedirs(os.path.dirname(output_model_path), exist_ok=True)
             print(f'Model saved to {output_model_path}')
 
     print(f'Target acc: {target_acc:.4f}')
