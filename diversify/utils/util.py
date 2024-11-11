@@ -140,6 +140,7 @@ def get_args():
     parser.add_argument('--task', type=str, default="cross_people")
     parser.add_argument('--test_envs', type=int, nargs='+', default=[0])
     parser.add_argument('--output', type=str, default="train_output")
+    parser.add_argument('--output_model', type=str, default="model_output")
     parser.add_argument('--weight_decay', type=float, default=5e-4)
     args = parser.parse_args()
     args.steps_per_epoch = 10000000000
