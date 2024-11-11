@@ -12,6 +12,7 @@ def download_dataset(dataset_name, data_dir):
     """
     dataset_urls = {
         'EMG': 'https://wjdcloud.blob.core.windows.net/dataset/diversity_emg.zip',
+        'Speech_Commands': 'http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz'
         # Add more datasets here
     }
 
