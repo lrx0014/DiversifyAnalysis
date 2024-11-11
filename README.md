@@ -3,7 +3,16 @@
 This repo reproduces the experiments from paper "[OUT-OF-DISTRIBUTION REPRESENTATION LEARNING FOR TIME SERIES CLASSIFICATION](https://openreview.net/pdf?id=gUZWOE42l6Q)"
 
 ## How-to
-- TODO
+### 1. preprocess
+Download and prepare your datasets by:
+``` python 
+python prepare_dataset.py --data_dir ./data/ --dataset EMG
+```
+if executed successfully, dataset EMG will be saved to ./data/emg
+
+### 2. train
+
+### 3. evaluate
 
 ## References
 ```
