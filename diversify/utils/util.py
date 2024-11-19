@@ -88,13 +88,13 @@ class Tee:
 
 
 def act_param_init(args):
+    # TODO for other datasets
     args.select_position = {'emg': [0]}
     args.select_channel = {'emg': np.arange(8)}
     args.hz_list = {'emg': 1000}
     args.act_people = {'emg': [[i*9+j for j in range(9)]for i in range(4)]}
     tmp = {'emg': ((8, 1, 200), 6, 10)}
-    args.num_classes, args.input_shape, args.grid_size = tmp[
-        args.dataset][1], tmp[args.dataset][0], tmp[args.dataset][2]
+    args.num_classes, args.input_shape, args.grid_size = tmp[args.dataset][1], tmp[args.dataset][0], tmp[args.dataset][2]
 
     return args
 

@@ -6,38 +6,39 @@ import zipfile
 import requests
 
 
-def download_dataset(dataset_name, data_dir):
+def preprocess_dataset(dataset_name, data_dir):
     """
-    Download the specified dataset to the given directory.
+    Perform any necessary preprocessing on the dataset.
     """
-    dataset_urls = {
-        'EMG': 'https://wjdcloud.blob.core.windows.net/dataset/diversity_emg.zip',
-        'Speech_Commands': 'http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz'
-        # Add more datasets here
-    }
+    print(f"Preprocessing {dataset_name}...")
 
-    if dataset_name not in dataset_urls:
-        raise ValueError(f"Dataset '{dataset_name}' not found. Available datasets: {list(dataset_urls.keys())}")
+    if dataset_name == 'EMG':
+        prepare_emg(data_dir)
+    elif dataset_name == 'SpeechCommand':
+        prepare_speech_command(data_dir)
+    else:
+        print(f"No preprocessing function defined for {dataset_name}")
 
-    url = dataset_urls[dataset_name]
-    dataset_path = os.path.join(data_dir, f"{dataset_name}.zip")
-    print(f"Downloading {dataset_name}...")
+
+def prepare_emg(data_dir):
+    """
+    Preprocess dataset EMG.
+    """
+
+    # download the dataset
+    url = 'https://wjdcloud.blob.core.windows.net/dataset/diversity_emg.zip'
+    dataset_path = os.path.join(data_dir, f"emg.zip")
+    print(f"Downloading EMG...")
 
     response = requests.get(url, stream=True)
     with open(dataset_path, 'wb') as f:
         for chunk in response.iter_content(chunk_size=1024):
             if chunk:
                 f.write(chunk)
+    print(f"Downloaded EMG to {dataset_path}")
 
-    print(f"Downloaded {dataset_name} to {dataset_path}")
-    return dataset_path
-
-
-def extract_dataset(dataset_path, data_dir):
-    """
-    Extract the downloaded dataset.
-    """
-    print(f"Extracting {dataset_path}...")
+    # extract data
+    print(f"Extracting EMG...")
     if dataset_path.endswith(".zip"):
         with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
             zip_ref.extractall(data_dir)
@@ -52,24 +53,14 @@ def extract_dataset(dataset_path, data_dir):
     # Clean up the zip file
     os.remove(dataset_path)
 
-
-def preprocess_dataset(dataset_name, data_dir):
-    """
-    Perform any necessary preprocessing on the dataset.
-    """
-    print(f"Preprocessing {dataset_name}...")
-
-    if dataset_name == 'EMG':
-        preprocess_emg(data_dir)
-    else:
-        print(f"No preprocessing function defined for {dataset_name}")
-
-
-def preprocess_emg(data_dir):
-    """
-    Preprocess dataset EMG.
-    """
     print("Processing dataset EMG done.")
+
+
+def prepare_speech_command(data_dir):
+    """
+    Preprocess dataset Speech-Command.
+    """
+    print("Processing dataset Speech-Command done.")
 
 
 def main():
@@ -85,8 +76,6 @@ def main():
     os.makedirs(data_dir, exist_ok=True)
 
     # Download, extract, and preprocess dataset
-    dataset_path = download_dataset(dataset_name, data_dir)
-    extract_dataset(dataset_path, data_dir)
     preprocess_dataset(dataset_name, data_dir)
 
 
