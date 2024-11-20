@@ -2,6 +2,7 @@
 # Licensed under the MIT License.
 
 
+import torch
 from torchvision import transforms
 import numpy as np
 
@@ -16,8 +17,17 @@ def loaddata_from_numpy(dataset='dsads', task='cross_people', root_dir='./data/a
     if dataset == 'pamap' and task == 'cross_people':
         x = np.load(root_dir+dataset+'/'+dataset+'_x1.npy')
         ty = np.load(root_dir+dataset+'/'+dataset+'_y1.npy')
+        cy, py, sy = ty[:, 0], ty[:, 1], ty[:, 2]
+
+    elif dataset == 'SpeechCommand':
+        x = torch.load(root_dir + dataset + '/processed_data/speech_commands_with_mels/' + 'train_a.pt')  
+        y = torch.load(root_dir + dataset + '/processed_data/speech_commands_with_mels/' + 'train_y.pt') 
+        cy = y
+        py, sy = None, None  
+
     else:
         x = np.load(root_dir+dataset+'/'+dataset+'_x.npy')
         ty = np.load(root_dir+dataset+'/'+dataset+'_y.npy')
-    cy, py, sy = ty[:, 0], ty[:, 1], ty[:, 2]
+        cy, py, sy = ty[:, 0], ty[:, 1], ty[:, 2]
+
     return x, cy, py, sy

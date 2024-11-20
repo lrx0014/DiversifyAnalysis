@@ -34,21 +34,47 @@ class ActList(mydataset):
         self.dlabels = np.ones(self.labels.shape) * \
             (group_num-Nmax(args, group_num))
 
-    def comb_position(self, x, cy, py, sy):
+    # def comb_position(self, x, cy, py, sy):
+    #     for i, peo in enumerate(self.people_group):
+    #         index = np.where(py == peo)[0]
+    #         tx, tcy, tsy = x[index], cy[index], sy[index]
+    #         for j, sen in enumerate(self.position):
+    #             index = np.where(tsy == sen)[0]
+    #             if j == 0:
+    #                 ttx, ttcy = tx[index], tcy[index]
+    #             else:
+    #                 ttx = np.hstack((ttx, tx[index]))
+    #         if i == 0:
+    #             self.x, self.labels = ttx, ttcy
+    #         else:
+    #             self.x, self.labels = np.vstack(
+    #                 (self.x, ttx)), np.hstack((self.labels, ttcy))
+
+    def comb_position(self, x, py, cy=None, sy=None):
+
         for i, peo in enumerate(self.people_group):
             index = np.where(py == peo)[0]
-            tx, tcy, tsy = x[index], cy[index], sy[index]
-            for j, sen in enumerate(self.position):
-                index = np.where(tsy == sen)[0]
-                if j == 0:
-                    ttx, ttcy = tx[index], tcy[index]
-                else:
-                    ttx = np.hstack((ttx, tx[index]))
+            
+            tx = x[index]
+            tcy = cy[index] if cy is not None else py[index]  
+            tsy = sy[index] if sy is not None else None 
+            
+            if tsy is not None:
+                for j, sen in enumerate(self.position):
+                    index = np.where(tsy == sen)[0]
+                    if j == 0:
+                        ttx, ttcy = tx[index], tcy[index]
+                    else:
+                        ttx = np.hstack((ttx, tx[index]))
+            else:
+                ttx, ttcy = tx, tcy
+
             if i == 0:
                 self.x, self.labels = ttx, ttcy
             else:
-                self.x, self.labels = np.vstack(
-                    (self.x, ttx)), np.hstack((self.labels, ttcy))
+                self.x = np.vstack((self.x, ttx))
+                self.labels = np.hstack((self.labels, ttcy))
+
 
     def set_x(self, x):
         self.x = x
