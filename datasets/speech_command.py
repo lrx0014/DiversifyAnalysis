@@ -50,9 +50,10 @@ def _process_data(intensity_data, data_dir):
     batch_index = 0
     y_index = 0
     for foldername in ('yes', 'no', 'up', 'down', 'left', 'right', 'on', 'off', 'stop', 'go'):
-        loc = base_loc / foldername
+        loc = os.path.join(base_loc, foldername)
+        # loc = base_loc / foldername
         for filename in os.listdir(loc):
-            audio, _ = torchaudio.load(loc / filename, channels_first=False,
+            audio, _ = torchaudio.load(os.path.join(loc, filename), channels_first=False,
                                            normalize=False)  # for forward compatbility if they fix it
             audio = audio / 2 ** 15  # Normalization argument doesn't seem to work so we do it manually.
 
@@ -101,9 +102,10 @@ def get_data(intensity_data, batch_size, data_dir):
         val_final_index = tensors['val_final_index']
         test_final_index = tensors['test_final_index']
     else:
-        download(data_dir)
+        if not os.path.exists(data_dir):
+            download(data_dir)
         (times, train_coeffs, val_coeffs, test_coeffs, train_y, val_y, test_y, train_final_index, val_final_index,
-         test_final_index) = _process_data(intensity_data)
+         test_final_index) = _process_data(intensity_data, data_dir)
         if not os.path.exists(base_base_loc):
             os.mkdir(base_base_loc)
         if not os.path.exists(loc):
@@ -225,7 +227,7 @@ def wrap_data(times, train_coeffs, val_coeffs, test_coeffs, train_y, val_y, test
 
 def save_data(dir, **tensors):
     for tensor_name, tensor_value in tensors.items():
-        torch.save(tensor_value, str(dir / tensor_name) + '.pt')
+        torch.save(tensor_value, str(os.path.join(dir, tensor_name)) + '.pt')
 
 
 def load_data(dir):

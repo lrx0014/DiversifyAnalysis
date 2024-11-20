@@ -2,3 +2,4 @@
 *.zip
 venv
 data
+__pycache__
