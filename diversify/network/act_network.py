@@ -11,8 +11,8 @@ var_size = {
         'fc_size': 32*44
     },
     'SpeechCommand': {
-        'in_size': 160,
-        'ker_size': 5,
+        'in_size': 1,
+        'ker_size': 6,
         'fc_size': 160*32
     }
 }
