@@ -102,8 +102,7 @@ def get_data(intensity_data, batch_size, data_dir):
         val_final_index = tensors['val_final_index']
         test_final_index = tensors['test_final_index']
     else:
-        if not os.path.exists(data_dir):
-            download(data_dir)
+        download(data_dir)
         (times, train_coeffs, val_coeffs, test_coeffs, train_y, val_y, test_y, train_final_index, val_final_index,
          test_final_index) = _process_data(intensity_data, data_dir)
         if not os.path.exists(base_base_loc):
