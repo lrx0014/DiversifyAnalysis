@@ -257,7 +257,6 @@ def download_sc_directly(data_dir):
     if not os.path.exists(data_dir):
         os.mkdir(data_dir)
 
-    response = requests.get(url, stream=True)
     urllib.request.urlretrieve(url, dataset_path, pbar.show_progress)
     print(f"Downloaded SpeechCommand to {dataset_path}")
 

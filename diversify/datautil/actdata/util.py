@@ -20,8 +20,8 @@ def loaddata_from_numpy(dataset='dsads', task='cross_people', root_dir='./data/a
         cy, py, sy = ty[:, 0], ty[:, 1], ty[:, 2]
 
     elif dataset == 'SpeechCommand':
-        x = torch.load(root_dir + dataset + '/processed_data/speech_commands_with_mels/' + 'train_a.pt')  
-        y = torch.load(root_dir + dataset + '/processed_data/speech_commands_with_mels/' + 'train_y.pt') 
+        x = torch.load(root_dir + dataset + '/train_a.pt')  
+        y = torch.load(root_dir + dataset + '/train_y.pt') 
         cy = y
         py, sy = None, None  
 
