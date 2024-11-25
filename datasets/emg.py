@@ -3,6 +3,9 @@ import tarfile
 import zipfile
 
 import requests
+import urllib
+
+import utils.progress_bar as pbar
 
 
 def prepare_emg(data_dir):
@@ -15,11 +18,12 @@ def prepare_emg(data_dir):
     dataset_path = os.path.join(data_dir, f"emg.zip")
     print(f"Downloading EMG...")
 
-    response = requests.get(url, stream=True)
-    with open(dataset_path, 'wb') as f:
-        for chunk in response.iter_content(chunk_size=1024):
-            if chunk:
-                f.write(chunk)
+    if os.path.exists(dataset_path):
+        return
+    if not os.path.exists(data_dir):
+        os.mkdir(data_dir)
+
+    urllib.request.urlretrieve(url, dataset_path, pbar.show_progress)
     print(f"Downloaded EMG to {dataset_path}")
 
     # extract data

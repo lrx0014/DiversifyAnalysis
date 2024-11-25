@@ -3,6 +3,8 @@ import pathlib
 import sys
 import urllib.request
 import tarfile
+import zipfile
+import requests
 import torch
 import torchaudio
 import sklearn.model_selection
@@ -237,3 +239,42 @@ def load_data(dir):
             tensor_value = torch.load(str(dir / filename))
             tensors[tensor_name] = tensor_value
     return tensors
+
+
+def download_sc_directly(data_dir):
+    """
+    download preprocessed speech-command dataset directly from cloud drive.
+    """
+
+    # download the dataset
+    url = 'https://www.dropbox.com/scl/fi/f4buo6yw5pponzbiqx14c/SpeechCommand_preprocessed.zip?rlkey=sbalt4qk21v7no68ie398vzhf&st=t5h5gun0&dl=1'
+    dataset_path = os.path.join(data_dir, f"sc_processed_data.zip")
+    
+    print(f"[dropbox] Downloading SpeechCommand...")
+
+    if os.path.exists(dataset_path):
+        return
+    if not os.path.exists(data_dir):
+        os.mkdir(data_dir)
+
+    response = requests.get(url, stream=True)
+    urllib.request.urlretrieve(url, dataset_path, pbar.show_progress)
+    print(f"Downloaded SpeechCommand to {dataset_path}")
+
+    # extract data
+    print(f"Extracting SpeechCommand...")
+    if dataset_path.endswith(".zip"):
+        with zipfile.ZipFile(dataset_path, 'r') as zip_ref:
+            zip_ref.extractall(data_dir)
+    elif dataset_path.endswith((".tar", ".tar.gz", ".tar.bz2")):
+        with tarfile.open(dataset_path, 'r:*') as tar_ref:
+            tar_ref.extractall(data_dir)
+    else:
+        raise ValueError("Unsupported file format. Please provide a zip, tar, tar.gz, or tar.bz2 file.")
+
+    print(f"Extracted to {data_dir}")
+
+    # Clean up the zip file
+    os.remove(dataset_path)
+
+    print("Processing dataset SpeechCommand done.")
