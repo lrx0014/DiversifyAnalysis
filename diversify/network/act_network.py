@@ -40,5 +40,7 @@ class ActNetwork(nn.Module):
 
     def forward(self, x):
         x = self.conv2(self.conv1(x))
+        print(f"====> x.shape {x.shape}")
         x = x.view(-1, self.in_features)
+        print(f"after x.view ====> x.shape {x.shape}")
         return x
