@@ -35,7 +35,7 @@ def loaddata_from_numpy(dataset='dsads', task='cross_people', root_dir='./data/a
     elif dataset == datasets.SpeechCommand:
         x = np.load(root_dir+dataset+'/'+dataset+'_x.npy')
         ty = np.load(root_dir+dataset+'/'+dataset+'_y.npy')
-        cy, py, sy = ty[:, 0], None, None
+        cy, py, sy = ty, None, None
 
     else:
         x = np.load(root_dir+dataset+'/'+dataset+'_x.npy')
