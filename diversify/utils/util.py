@@ -92,7 +92,7 @@ def act_param_init(args):
     args.select_position = {'emg': [0]}
     args.select_channel = {'emg': np.arange(8)}
     args.hz_list = {'emg': 1000}
-    
+
     # people group
     args.act_people = {
         'emg': [[i*9+j for j in range(9)]for i in range(4)],
@@ -100,7 +100,7 @@ def act_param_init(args):
         }
     tmp = {
         'emg': ((8, 1, 200), 6, 10),
-        'SpeechCommand': ((160, 21, 1), 10, None),
+        'SpeechCommand': ((160, 1, 21), 10, None),
         }
     args.num_classes, args.input_shape, args.grid_size = tmp[args.dataset][1], tmp[args.dataset][0], tmp[args.dataset][2]
 
