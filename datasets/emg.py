@@ -14,7 +14,7 @@ def prepare_emg(data_dir):
     """
 
     # download the dataset
-    url = 'https://wjdcloud.blob.core.windows.net/dataset/diversity_emg.zip'
+    url = 'https://www.dropbox.com/scl/fi/2msk3ke7ly7j6elbb6nn1/emg_processed.zip?rlkey=9a6v1mblczufvz1r0dulob8r7&st=vk36hkdj&dl=1'
     dataset_path = os.path.join(data_dir, f"emg.zip")
     print(f"Downloading EMG...")
 

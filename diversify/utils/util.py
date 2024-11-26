@@ -92,6 +92,8 @@ def act_param_init(args):
     args.select_position = {'emg': [0]}
     args.select_channel = {'emg': np.arange(8)}
     args.hz_list = {'emg': 1000}
+    
+    # people group
     args.act_people = {
         'emg': [[i*9+j for j in range(9)]for i in range(4)],
         'SpeechCommand': [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9]],

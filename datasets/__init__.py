@@ -1,0 +1,2 @@
+EMG = "emg"
+SpeechCommand = "SpeechCommand"
