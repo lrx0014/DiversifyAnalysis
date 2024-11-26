@@ -21,16 +21,21 @@ def loaddata_from_numpy(dataset='dsads', task='cross_people', root_dir='./data/a
         ty = np.load(root_dir+dataset+'/'+dataset+'_y1.npy')
         cy, py, sy = ty[:, 0], ty[:, 1], ty[:, 2]
 
+    # elif dataset == datasets.SpeechCommand:
+    #     x = torch.cat([
+    #         torch.load(root_dir + dataset + '/train_a.pt'),
+    #         torch.load(root_dir + dataset + '/train_b.pt'),
+    #         torch.load(root_dir + dataset + '/train_c.pt'),
+    #         torch.load(root_dir + dataset + '/train_d.pt'),
+    #     ])
+    #     y = torch.load(root_dir + dataset + '/train_y.pt') 
+    #     cy = y
+    #     py, sy = None, None  
+
     elif dataset == datasets.SpeechCommand:
-        x = torch.cat([
-            torch.load(root_dir + dataset + '/train_a.pt'),
-            torch.load(root_dir + dataset + '/train_b.pt'),
-            torch.load(root_dir + dataset + '/train_c.pt'),
-            torch.load(root_dir + dataset + '/train_d.pt'),
-        ])
-        y = torch.load(root_dir + dataset + '/train_y.pt') 
-        cy = y
-        py, sy = None, None  
+        x = np.load(root_dir+dataset+'/'+dataset+'_x.npy')
+        ty = np.load(root_dir+dataset+'/'+dataset+'_y.npy')
+        cy, py, sy = ty[:, 0], None, None
 
     else:
         x = np.load(root_dir+dataset+'/'+dataset+'_x.npy')

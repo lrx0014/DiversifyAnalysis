@@ -247,7 +247,7 @@ def download_sc_directly(data_dir):
     """
 
     # download the dataset
-    url = 'https://www.dropbox.com/scl/fi/y4oak1rgg17brebcxtcyx/SpeechCommand_preprocessed.zip?rlkey=spk2p8jkq5w9h37p6o3sp9zoh&st=4zzb6be7&dl=1'
+    url = 'https://www.dropbox.com/scl/fi/pb8lp0fc4pihcrdqht1wi/SpeechCommand.zip?rlkey=vk7ulmfitiezrd3jn7l44k3ii&st=guwo4wuy&dl=1'
     dataset_path = os.path.join(data_dir, f"sc_processed_data.zip")
     
     print(f"[dropbox] Downloading SpeechCommand...")
