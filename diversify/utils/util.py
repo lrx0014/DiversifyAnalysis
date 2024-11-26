@@ -96,7 +96,7 @@ def act_param_init(args):
     # people group
     args.act_people = {
         'emg': [[i*9+j for j in range(9)]for i in range(4)],
-        'SpeechCommand': [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9]],
+        'SpeechCommand': [[0],[1]],
         }
     tmp = {
         'emg': ((8, 1, 200), 6, 10),
