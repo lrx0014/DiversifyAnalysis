@@ -81,6 +81,7 @@ Note: we open-sourced all the training logs on [wandb](https://wandb.ai/luw12thu
 | AdaRNN    | 68.8      | 81.1      | 75.3      | 78.1      | 75.8      |
 | DIVERSIFY (Table 1 in paper, Pytorch=1.7.1) | **71.7** | **82.4** | **76.9** | **77.3** | **77.1** |
 | DIVERSIFY (This code, Pytorch=1.13.1) | **73.1** | **86.8** | **80.4** | **81.6** | **80.5** |
+| DIVERSIFY (This code, trail results) | **78.67** | **85** | **76.14** | **74.787** | **78.64** |
 
 **Statement:** This work was completed in Sep. 2021 and then submitted to ICLR 2022. Yet it was rejected even if the scores are [866](https://openreview.net/forum?id=NX0nX7TE4lc). So the main results in the paper are obtained using Pytorch 1.7.1. By the time of this year (2023), Pytorch 1.7.1 is too obsolete for most machines and may not be reproducible. So, we rerun the code using Pytorch 1.13.1 for better reproducibility. Thus, the results using different Pytorch versions may vary. To show our initial logs in the paper for integraty and reproducibility, interested readers can refer to this [wandb](https://wandb.ai/luw12thu/diversify) to see our training logs. Note that the new results using Pytorch 1.13.1 are even better than those in the paper, haha. If you want to use Pytorch 1.7.1, you can refer to this [docker](https://hub.docker.com/r/luwang0517/torch10).
 
