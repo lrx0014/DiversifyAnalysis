@@ -16,10 +16,13 @@ python train.py --data_dir ./data/ --task cross_people --test_envs 0 --dataset e
 ```
 - specify your dataset with **--data_dir**
 - specify your dataset name with **--dataset**
+- specify a different test group with **--test_envs** if appliable
 - training log will be saved to **--output**
 - generated models will be saved to **--output_model**
+- see other parameters list with **--help**
 
 ### 3. evaluate
+for each training round, the output value 'target acc' is the accuracy value for the model
 
 ## References
 ```
