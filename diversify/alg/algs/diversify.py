@@ -20,6 +20,7 @@ class Diversify(Algorithm):
 
         super(Diversify, self).__init__(args)
         self.featurizer = get_fea(args)
+        print("self.featurizer.in_features ===> " + str(self.featurizer.in_features))
         self.dbottleneck = common_network.feat_bottleneck(
             self.featurizer.in_features, args.bottleneck, args.layer)
         self.ddiscriminator = Adver_network.Discriminator(
