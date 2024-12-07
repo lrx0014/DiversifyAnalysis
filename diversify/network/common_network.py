@@ -15,6 +15,9 @@ class feat_bottleneck(nn.Module):
         self.bottleneck = nn.Linear(feature_dim, bottleneck_dim)
         self.type = type
 
+        print("=======> bottleneck_dim:" + str(bottleneck_dim))
+        print("=======> feature_dim:" + str(feature_dim))
+
     def forward(self, x):
         x = self.bottleneck(x)
         if self.type == "bn":
