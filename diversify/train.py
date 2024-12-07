@@ -40,7 +40,6 @@ def main(args):
 
         for step in range(args.local_epoch):
             for data in train_loader:
-                print("====>" + str(data))
                 loss_result_dict = algorithm.update_a(data, opta)
             print_row([step]+[loss_result_dict[item]
                               for item in loss_list], colwidth=15)
