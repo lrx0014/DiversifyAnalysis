@@ -100,7 +100,7 @@ def act_param_init(args):
         }
     tmp = {
         'emg': ((8, 1, 200), 6, 10),
-        'SpeechCommand': ((160, 1, 21), 10, None),
+        'SpeechCommand': ((161, 1, 21), 10, 10),
         }
     args.num_classes, args.input_shape, args.grid_size = tmp[args.dataset][1], tmp[args.dataset][0], tmp[args.dataset][2]
 

@@ -13,11 +13,12 @@ def main(args):
     set_random_seed(args.seed)
 
     print_environ()
-    print(s)
     if args.latent_domain_num < 6:
         args.batch_size = 32*args.latent_domain_num
     else:
         args.batch_size = 16*args.latent_domain_num
+
+    print(s)
 
     train_loader, train_loader_noshuffle, valid_loader, target_loader, _, _, _ = get_act_dataloader(
         args)
