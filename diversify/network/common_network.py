@@ -21,7 +21,6 @@ class feat_bottleneck(nn.Module):
     def forward(self, x):
         x = self.bottleneck(x)
         if self.type == "bn":
-            print("======>" + str(x))
             x = self.bn(x)
         return x
 
