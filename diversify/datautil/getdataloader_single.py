@@ -14,6 +14,7 @@ task_act = {'cross_people': cross_people}
 
 
 def get_dataloader(args, tr, val, tar):
+    print("batch size ====> " + str(args.bach_size))
     train_loader = DataLoader(dataset=tr, batch_size=args.batch_size,
                               num_workers=args.N_WORKERS, drop_last=False, shuffle=True)
     train_loader_noshuffle = DataLoader(
