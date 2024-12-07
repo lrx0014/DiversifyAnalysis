@@ -43,7 +43,7 @@ def download(data_dir):
     print(f"downloaded dataset file to {base_loc}.")
 
 
-def _process_data(intensity_data, data_dir):
+def _process_data(loc, intensity_data, data_dir):
     print("processing dataset file...")
     base_loc = data_dir
     X = torch.empty(34975, 16000, 1)
@@ -77,7 +77,7 @@ def _process_data(intensity_data, data_dir):
     final_index = torch.tensor(X.size(1) - 1).repeat(X.size(0))
 
     (times, train_coeffs, val_coeffs, test_coeffs, train_y, val_y, test_y, train_final_index, val_final_index,
-     test_final_index, _) = preprocess_data(times, X, y, final_index, append_times=True,
+     test_final_index, _) = preprocess_data(loc, times, X, y, final_index, append_times=True,
                                                    append_intensity=intensity_data)
 
     print(f"processed dataset files to {data_dir}.")
@@ -106,7 +106,7 @@ def get_data(intensity_data, batch_size, data_dir):
     else:
         download(data_dir)
         (times, train_coeffs, val_coeffs, test_coeffs, train_y, val_y, test_y, train_final_index, val_final_index,
-         test_final_index) = _process_data(intensity_data, data_dir)
+         test_final_index) = _process_data(loc, intensity_data, data_dir)
         if not os.path.exists(base_base_loc):
             os.mkdir(base_base_loc)
         if not os.path.exists(loc):
@@ -170,7 +170,7 @@ def normalise_data(X, y):
     return out
 
 
-def preprocess_data(times, X, y, final_index, append_times, append_intensity):
+def preprocess_data(loc, times, X, y, final_index, append_times, append_intensity):
     X = normalise_data(X, y)
 
     # Append extra channels together. Note that the order here: time, intensity, original, is important, and some models
@@ -191,6 +191,8 @@ def preprocess_data(times, X, y, final_index, append_times, append_intensity):
     train_X, val_X, test_X = split_data(X, y)
     train_y, val_y, test_y = split_data(y, y)
     train_final_index, val_final_index, test_final_index = split_data(final_index, y)
+
+    save_data(loc, _train_X=train_X, _val_X=val_X,_test_X=test_X, _train_y=train_y,_val_y=val_y,_test_y=test_y)
 
     train_coeffs = controldiffeq.natural_cubic_spline_coeffs(times, train_X)
     val_coeffs = controldiffeq.natural_cubic_spline_coeffs(times, val_X)
@@ -247,7 +249,7 @@ def download_sc_directly(data_dir):
     """
 
     # download the dataset
-    url = 'https://www.dropbox.com/scl/fi/pb8lp0fc4pihcrdqht1wi/SpeechCommand.zip?rlkey=vk7ulmfitiezrd3jn7l44k3ii&st=guwo4wuy&dl=1'
+    url = 'https://www.dropbox.com/scl/fi/q5t42y4w753b94ked3y61/SpeechCommand_24482.zip?rlkey=ely4avzkhitivtymz4sjnwd23&st=boqnsaov&dl=1'
     dataset_path = os.path.join(data_dir, f"sc_processed_data.zip")
     
     print(f"[dropbox] Downloading SpeechCommand...")
